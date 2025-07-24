@@ -156,7 +156,7 @@ export function HeroSection() {
                 {/* Rally Car - Custom CSS Design */}
                 <div className="relative w-64 h-48 sm:w-80 sm:h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-80">
                   {/* Car Body */}
-                  <img src="/images/3d-car2.png" alt="Vehicle" className="w-full h-full object-contain" />
+                  <img src="/3d-car2.png" alt="Vehicle" className="w-full h-full object-contain" />
                   
                   {/* Wheels */}
                   <div className="absolute bottom-0 left-4 sm:left-6 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gray-800 rounded-full shadow-lg">
