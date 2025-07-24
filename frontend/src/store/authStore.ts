@@ -28,9 +28,12 @@ export const useAuthStore = create<AuthState>()(
 
       login: async (email: string, password: string) => {
         try {
+          console.log('🔐 AuthStore: Starting login for:', email);
           const response = await api.post('/auth/login', { email, password });
+          console.log('📡 AuthStore: Login response:', response);
           
           if (response.data.success) {
+            console.log('✅ AuthStore: Login successful');
             set({
               user: response.data.data.user,
               token: response.data.data.token,
@@ -39,9 +42,11 @@ export const useAuthStore = create<AuthState>()(
             localStorage.setItem('token', response.data.data.token);
             return { success: true };
           } else {
+            console.log('❌ AuthStore: Login failed:', response.data.message);
             return { success: false, message: response.data.message };
           }
         } catch (error: unknown) {
+          console.log('💥 AuthStore: Login error:', error);
           const errorMessage = error instanceof Error ? error.message : 'Network error. Please try again.';
           return { success: false, message: errorMessage };
         }
