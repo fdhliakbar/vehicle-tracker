@@ -31,17 +31,27 @@ export function AdminDashboard() {
     navigate('/auth');
   };
 
+  // Handler untuk navigasi ke homepage
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3">
-                <img src="/images/3d-car.png" alt="3D Car" className="h-8 w-8" />
+            <div 
+              className="flex items-center cursor-pointer group transition-all duration-200 hover:transform hover:scale-105"
+              onClick={handleLogoClick}
+            >
+              <div className="w-8 h-8 bg-[#F97C21] rounded-lg group-hover:bg-[#F97C21]/90 flex items-center justify-center mr-3 transition-colors duration-200">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Admin Dashboard</h1>
+              <h1 className="text-xl font-bold text-gray-900 group-hover:text-[#F97C21] transition-colors duration-200">Admin Dashboard</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
@@ -59,13 +69,13 @@ export function AdminDashboard() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 mb-8">
+        <div className="bg-gradient-to-r from-[#fa8734] to-[#F97C21]/70 rounded-2xl p-8 mb-8">
           <div className="text-white">
             <h1 className="text-4xl font-bold mb-4">🎉 Login Berhasil!</h1>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-white">
               Selamat datang di Admin Dashboard, {user?.name}!
             </p>
-            <p className="text-blue-200 mt-2">
+            <p className="text-white mt-2">
               Anda berhasil login sebagai Administrator dan dapat mengakses semua fitur sistem.
             </p>
           </div>

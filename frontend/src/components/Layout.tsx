@@ -25,7 +25,11 @@ export function Layout({ children }: LayoutProps) {
       <header className="bg-white shadow-lg fixed top-0 left-0 w-full z-50">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link to="/" className="text-2xl font-bold text-black transition-colors duration-300 flex items-center">
-                <img src="/images/3d-car.png" alt="3D Car" className="h-12 mr-2" />
+                <div className="w-8 h-8 bg-[#F97C21]/80 rounded-lg flex items-center justify-center mr-3">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
                 <span>Vehicle Tracker</span>
             </Link>
             
@@ -37,14 +41,14 @@ export function Layout({ children }: LayoutProps) {
                 )}
                 <button
                   onClick={handleAuthAction}
-                  className="bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300"
+                  className="bg-[#F97C21] text-white px-4 py-2 rounded-lg hover:bg-[#F97C21]/80 transition-colors duration-300"
                 >
                   {isAuthenticated ? 'Logout' : 'Sign Up'}
                 </button>
             </div>
             <button 
               id="mobileMenuButton" 
-              className="md:hidden text-gray-700 hover:text-indigo-800 focus:outline-none transition-colors duration-300"
+              className="md:hidden text-gray-700 hover:text-[#F97C21] focus:outline-none transition-colors duration-300"
               onClick={() => {
                 const menu = document.getElementById('mobileMenu');
                 if (menu) {
@@ -59,10 +63,10 @@ export function Layout({ children }: LayoutProps) {
         </nav>
         <div id="mobileMenu" className="mobile-menu md:hidden bg-white shadow-lg absolute w-full left-0 transform -translate-y-full opacity-0 transition-all duration-300">
             <div className="container mx-auto px-4 py-4 space-y-4">
-                <Link to="/" className="block text-gray-700 hover:text-indigo-800 transition-colors duration-300">Home</Link>
-                <a href="#about" className="block text-gray-700 hover:text-indigo-800 transition-colors duration-300">About</a>
-                <a href="#services" className="block text-gray-700 hover:text-indigo-800 transition-colors duration-300">Services</a>
-                <a href="#contact" className="block text-gray-700 hover:text-indigo-800 transition-colors duration-300">Contact</a>
+                <Link to="/" className="block text-gray-700 hover:text-[#F97C21] transition-colors duration-300">Home</Link>
+                <a href="#about" className="block text-gray-700 hover:text-[#F97C21] transition-colors duration-300">About</a>
+                <a href="#services" className="block text-gray-700 hover:text-[#F97C21] transition-colors duration-300">Services</a>
+                <a href="#contact" className="block text-gray-700 hover:text-[#F97C21] transition-colors duration-300">Contact</a>
                 {isAuthenticated && user && (
                   <span className="block text-sm text-gray-600 px-2">
                     Welcome, {user.name}
@@ -70,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
                 )}
                 <button
                   onClick={handleAuthAction}
-                  className="inline-block bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300"
+                  className="inline-block bg-[#F97C21] text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300"
                 >
                   {isAuthenticated ? 'Logout' : 'Sign Up'}
                 </button>
@@ -82,15 +86,6 @@ export function Layout({ children }: LayoutProps) {
       <main className="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-gray-500 text-sm">
-            © 2025 Vehicle Tracker Dashboard. Built for Widya Intern Assignment.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

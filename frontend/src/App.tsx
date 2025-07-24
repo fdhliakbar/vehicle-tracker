@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { VehicleList } from './pages/VehicleList';
+import { FeaturesSection } from './pages/VehicleList';
 import { AuthPage } from './pages/AuthPage';
 import { AdminDashboard } from './pages/AdminDashboard';
-import { Layout } from './components/Layout';
 import { useAuthStore } from './store/authStore';
 
 // Protected Route Component
@@ -26,7 +25,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 
   if (isAuthenticated) {
     if (user?.role === 'ADMIN') {
-      return <Navigate to="/admin/dashboard" replace />;
+      return <Navigate to="/admin" replace />;
     }
     return <Navigate to="/" replace />;
   }
@@ -41,11 +40,7 @@ function App() {
         {/* Public Routes */}
         <Route 
           path="/" 
-          element={
-            <Layout>
-              <VehicleList />
-            </Layout>
-          } 
+          element={<FeaturesSection />} 
         />
         
         {/* Auth Route - redirect if already logged in */}
@@ -59,16 +54,15 @@ function App() {
         />
 
         {/* Protected Admin Routes */}
-        <Route 
-          path="/admin/dashboard" 
+        {/* Protected Routes */}
+        <Route
+          path="/admin"
           element={
             <ProtectedRoute requiredRole="ADMIN">
               <AdminDashboard />
             </ProtectedRoute>
-          } 
-        />
-
-        {/* Catch all route - redirect to home */}
+          }
+        />        {/* Catch all route - redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

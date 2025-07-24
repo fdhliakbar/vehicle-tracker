@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+  --primary-color: #F97C21;
+  --secondary-color: #1E40AF;
+  --accent-color: #3B82F6;
+  --background-color: #F3F4F6;
+  --text-color: #111827;
+}
 /* Custom animations for Hero section */
 @keyframes fadeInUp {
   from {
