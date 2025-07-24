@@ -80,8 +80,13 @@ async function main() {
   // Create users
   const saltRounds = 10;
   
+  // Get passwords from environment variables or use defaults for development
+  const adminPass = process.env.DEFAULT_ADMIN_PASSWORD || 'admin123';
+  const userPass = process.env.DEFAULT_USER_PASSWORD || 'user123';
+  const demoPass = process.env.DEFAULT_DEMO_PASSWORD || 'demo123';
+  
   // Admin user
-  const adminPassword = await bcrypt.hash('admin123', saltRounds);
+  const adminPassword = await bcrypt.hash(adminPass, saltRounds);
   await prisma.user.create({
     data: {
       email: 'admin@widya.com',
@@ -90,10 +95,10 @@ async function main() {
       role: 'ADMIN'
     }
   });
-  console.log('✅ Created admin user (email: admin@widya.com, password: admin123)');
+  console.log('✅ Created admin user (email: admin@widya.com, password: [HIDDEN])');
 
   // Regular user
-  const userPassword = await bcrypt.hash('user123', saltRounds);
+  const userPassword = await bcrypt.hash(userPass, saltRounds);
   await prisma.user.create({
     data: {
       email: 'user@widya.com',
@@ -102,10 +107,10 @@ async function main() {
       role: 'USER'
     }
   });
-  console.log('✅ Created regular user (email: user@widya.com, password: user123)');
+  console.log('✅ Created regular user (email: user@widya.com, password: [HIDDEN])');
 
   // Demo user
-  const demoPassword = await bcrypt.hash('demo123', saltRounds);
+  const demoPassword = await bcrypt.hash(demoPass, saltRounds);
   await prisma.user.create({
     data: {
       email: 'demo@widya.com',
@@ -114,13 +119,13 @@ async function main() {
       role: 'USER'
     }
   });
-  console.log('✅ Created demo user (email: demo@widya.com, password: demo123)');
+  console.log('✅ Created demo user (email: demo@widya.com, password: [HIDDEN])');
 
   console.log('🎉 Seed completed successfully!');
   console.log('\n📋 Available test accounts:');
-  console.log('👑 Admin: admin@widya.com / admin123');
-  console.log('👤 User: user@widya.com / user123');
-  console.log('🎭 Demo: demo@widya.com / demo123');
+  console.log('👑 Admin: admin@widya.com / [check .env or default: admin123]');
+  console.log('👤 User: user@widya.com / [check .env or default: user123]');
+  console.log('🎭 Demo: demo@widya.com / [check .env or default: demo123]');
 }
 
 main()
