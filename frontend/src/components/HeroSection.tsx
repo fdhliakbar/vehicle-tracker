@@ -1,46 +1,18 @@
 import { useState, useEffect } from 'react';
 
-// Simple icons without heroicons dependency
-const TruckIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
-);
-
-const MapPinIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-  </svg>
-);
-
-const BoltIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-  </svg>
-);
-
-const ChevronRightIcon = ({ className }: { className?: string }) => (
+// Icons for the new design
+const ArrowRightIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
   </svg>
 );
 
 export function HeroSection() {
-  const [currentStat, setCurrentStat] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   
-  const stats = [
-    { label: 'Active Vehicles', value: '150+', icon: TruckIcon },
-    { label: 'Cities Covered', value: '25+', icon: MapPinIcon },
-    { label: 'Real-time Updates', value: '24/7', icon: BoltIcon },
-  ];
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentStat((prev) => (prev + 1) % stats.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [stats.length]);
+    setIsVisible(true);
+  }, []);
 
   const scrollToVehicles = () => {
     const vehiclesSection = document.getElementById('vehicles-section');
@@ -49,121 +21,181 @@ export function HeroSection() {
 
   return (
     <>
-      <div className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-2000"></div>
+      {/* Inject CSS animations directly */}
+      <style>{`
+        @keyframes carBounce {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        @keyframes dustParticle {
+          0% { transform: translateX(0) translateY(0) scale(1); opacity: 0.6; }
+          50% { transform: translateX(-30px) translateY(-20px) scale(0.8); opacity: 0.8; }
+          100% { transform: translateX(-60px) translateY(-40px) scale(0.4); opacity: 0; }
+        }
+        
+        @keyframes slideInLeft {
+          from { opacity: 0; transform: translateX(-50px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(50px) rotate(12deg); }
+          to { opacity: 1; transform: translateX(0) rotate(0deg); }
+        }
+        
+        .glass-effect {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .text-shadow {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .car-bounce {
+          animation: carBounce 6s ease-in-out infinite;
+        }
+      `}</style>
+
+      <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-600">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div 
+            className="w-full h-full"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 1px, transparent 1px),
+                               radial-gradient(circle at 80% 50%, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+              backgroundSize: '100px 100px, 150px 150px'
+            }}
+          />
         </div>
 
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }}></div>
+        {/* Dust Animation Particles */}
+        <div className="absolute bottom-0 right-0 w-full h-full pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-orange-300 rounded-full opacity-60"
+              style={{
+                right: `${20 + i * 10}%`,
+                bottom: `${30 + i * 5}%`,
+                animation: `dustParticle 3s infinite ${i * 0.5}s ease-out`
+              }}
+            />
+          ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-          <div className="text-center">
-            {/* Main Hero Content */}
-            <div className="mb-8 animate-fade-in opacity-0 animate-delay-0" style={{ animation: 'fadeInUp 1s ease-out forwards' }}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                Real-Time
-                <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Vehicle Tracking
-                </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left Content */}
+            <div className="text-left">
+              {/* Subscription Badge */}
+              <div 
+                className={`inline-flex items-center px-4 py-2 rounded-full glass-effect text-white text-sm mb-8 transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ animationDelay: '0.2s' }}
+              >
+                Explore Our Features. Sign Up Now.
+              </div>
+
+              {/* Main Headline */}
+              <h1 
+                className={`text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
+                }`}
+                style={{ animationDelay: '0.4s' }}
+              >
+                Master Your Fleet.
+                <br />
+                <span className="text-orange-300">Drive Smarter.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed opacity-0" style={{ animation: 'fadeInUp 1s ease-out 0.3s forwards' }}>
-                Monitor your entire fleet in real-time with our advanced tracking system. 
-                Get insights on vehicle status, fuel levels, and location data instantly.
-              </p>
-            </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 opacity-0" style={{ animation: 'fadeInUp 1s ease-out 0.6s forwards' }}>
+              {/* Description */}
+              <p 
+                className={`text-lg text-blue-100 mb-8 max-w-lg leading-relaxed transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
+                }`}
+                style={{ animationDelay: '0.6s' }}
+              >
+                Get full visibility of every vehicle. Monitor real-time location, operational status, and fleet performance for better control and quick decision-making.
+              </p>
+
+              {/* CTA Button */}
               <button
                 onClick={scrollToVehicles}
-                className="group relative px-8 py-4 bg-white text-blue-900 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                className={`group inline-flex items-center px-8 py-4 bg-white text-gray-800 font-semibold rounded-full hover:bg-gray-100 transform hover:scale-105 hover:shadow-2xl transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ animationDelay: '0.8s' }}
               >
-                <span className="flex items-center justify-center">
-                  View Fleet Status
-                  <ChevronRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              </button>
-              
-              <button className="group px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-blue-900 transition-all duration-300 transform hover:scale-105">
-                <span className="flex items-center justify-center">
-                  Learn More
-                  <BoltIcon />
-                </span>
+                <span className="mr-3">Experience now</span>
+                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center group-hover:bg-gray-900 transition-colors">
+                  <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                </div>
               </button>
             </div>
 
-            {/* Animated Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto opacity-0" style={{ animation: 'fadeInUp 1s ease-out 0.9s forwards' }}>
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                const isActive = currentStat === index;
-                
-                return (
-                  <div
-                    key={index}
-                    className={`relative p-6 rounded-2xl backdrop-blur-sm transition-all duration-500 transform ${
-                      isActive 
-                        ? 'bg-white/20 scale-105 shadow-2xl' 
-                        : 'bg-white/10 hover:bg-white/15'
-                    }`}
-                  >
-                    <div className="flex items-center justify-center mb-4">
-                      <div className={`p-3 rounded-full transition-all duration-500 ${
-                        isActive ? 'bg-blue-400 scale-110' : 'bg-white/20'
-                      }`}>
-                        <Icon />
-                      </div>
+            {/* Right Content - Car Image */}
+            <div className="relative flex justify-center lg:justify-end">
+              {/* Car Container with Animation */}
+              <div 
+                className={`relative transition-all duration-1500 car-bounce ${
+                  isVisible ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-20 rotate-12'
+                }`}
+                style={{ animationDelay: '1s' }}
+              >
+                {/* Rally Car - Custom CSS Design */}
+                <div className="relative w-96 h-64 lg:w-[500px] lg:h-80">
+                  {/* Car Body */}
+                  <img src="/images/3d-car2.png" alt="" />
+                  
+                  {/* Wheels */}
+                  <div className="absolute bottom-0 left-8 w-16 h-16 bg-gray-800 rounded-full shadow-lg">
+                    <div className="absolute inset-2 bg-gray-600 rounded-full">
+                      <div className="absolute inset-2 bg-gray-400 rounded-full"></div>
                     </div>
-                    <div className={`text-3xl font-bold mb-2 transition-all duration-500 ${
-                      isActive ? 'text-white scale-110' : 'text-blue-100'
-                    }`}>
-                      {stat.value}
-                    </div>
-                    <div className={`text-sm font-medium transition-colors duration-500 ${
-                      isActive ? 'text-blue-100' : 'text-blue-200'
-                    }`}>
-                      {stat.label}
-                    </div>
-                    
-                    {/* Active indicator */}
-                    {isActive && (
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-2xl blur opacity-30 animate-pulse"></div>
-                    )}
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-              <div className="flex flex-col items-center text-white/60">
-                <span className="text-sm mb-2">Scroll to explore</span>
-                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                  <div className="absolute bottom-0 right-8 w-16 h-16 bg-gray-800 rounded-full shadow-lg">
+                    <div className="absolute inset-2 bg-gray-600 rounded-full">
+                      <div className="absolute inset-2 bg-gray-400 rounded-full"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Bottom Wave */}
+        {/* Desert Wave Bottom */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 1440 200" className="w-full h-auto">
+            <defs>
+              <linearGradient id="desertGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#fb923c" />
+                <stop offset="50%" stopColor="#f97316" />
+                <stop offset="100%" stopColor="#ea580c" />
+              </linearGradient>
+            </defs>
             <path
-              d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-              fill="rgb(249 250 251)"
+              d="M0,120 C150,200 300,160 450,140 C600,120 750,160 900,140 C1050,120 1200,160 1350,140 L1440,140 L1440,200 L0,200 Z"
+              fill="url(#desertGradient)"
+            />
+            <path
+              d="M0,140 C150,180 300,150 450,160 C600,170 750,150 900,160 C1050,170 1200,150 1350,160 L1440,160 L1440,200 L0,200 Z"
+              fill="#fed7aa"
+              opacity="0.3"
             />
           </svg>
+        </div>
+
+        {/* Brush Strokes */}
+        <div className="absolute bottom-0 left-0 w-full h-32 pointer-events-none">
+          <div className="absolute bottom-0 left-0 w-64 h-16 bg-white opacity-70 transform -rotate-12 rounded-full blur-sm"></div>
+          <div className="absolute bottom-4 right-20 w-32 h-8 bg-white opacity-50 transform rotate-6 rounded-full blur-sm"></div>
+          <div className="absolute bottom-8 left-1/3 w-48 h-6 bg-white opacity-40 transform -rotate-3 rounded-full blur-sm"></div>
         </div>
       </div>
     </>

@@ -23,18 +23,17 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
     : 'bg-red-500';
 
   const speedStatus = vehicle.speed > 0 ? 'Moving' : 'Parked';
-  const speedColor = vehicle.speed > 0 ? 'text-blue-600' : 'text-gray-500';
+  const speedColor = vehicle.speed > 0 ? 'text-[#F97C21]' : 'text-gray-500';
 
   return (
     <div className="vehicle-card bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden group">
       {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-      
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
       <div className="relative z-10">
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-900 transition-colors duration-300 mb-2">
+            <h3 className="text-xl font-bold text-gray-800 group-hover:text-[#F97C21] transition-colors duration-300 mb-2">
               {vehicle.name}
             </h3>
             <div className="flex items-center space-x-2">
@@ -48,8 +47,8 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
           </div>
           
           {/* Vehicle icon */}
-          <div className="p-3 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
-            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="p-3 bg-orange-100 rounded-full group-hover:bg-orange-200 transition-colors duration-300">
+            <svg className="w-6 h-6 text-[#F97C21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
           </div>
@@ -80,9 +79,9 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
             <div className="flex items-center space-x-1">
               {vehicle.speed > 0 ? (
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-100"></div>
-                  <div className="w-2 h-2 bg-blue-300 rounded-full animate-pulse delay-200"></div>
+                  <div className="w-2 h-2 bg-[#F97C21] rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-[#F97C21]/80 rounded-full animate-pulse delay-100"></div>
+                  <div className="w-2 h-2 bg-[#F97C21]/60 rounded-full animate-pulse delay-200"></div>
                 </div>
               ) : (
                 <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
@@ -98,7 +97,7 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
         <div className="space-y-3 mb-6">
           <div className="flex justify-between items-center py-2 border-b border-gray-100">
             <span className="text-sm text-gray-600 flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 mr-2 text-[#F97C21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
               Odometer
@@ -108,7 +107,7 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
           
           <div className="flex justify-between items-center py-2">
             <span className="text-sm text-gray-600 flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 mr-2 text-[#F97C21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -123,7 +122,7 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
         {/* Action Button */}
         <button
           onClick={() => onViewDetails(vehicle)}
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center space-x-2 group/btn"
+          className="w-full bg-gradient-to-r from-[#F97C21] to-[#F97C21]/90 hover:from-[#F97C21]/90 hover:to-[#F97C21] text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center space-x-2 group/btn"
         >
           <span>View Details</span>
           <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,7 +132,7 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
       </div>
 
       {/* Animated border on hover */}
-      <div className="absolute inset-0 rounded-2xl border-2 border-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute inset-0 rounded-2xl border-2 border-[#F97C21] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   );
 }
