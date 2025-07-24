@@ -169,7 +169,6 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-
         {/* Desert Wave Bottom */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 200" className="w-full h-auto">

@@ -18,5 +18,4 @@ router.put('/change-password', authenticateToken, changePassword);
 
 // GET /api/auth/users - Get all users (admin only)
 router.get('/users', authenticateToken, getAllUsers);
-
 export default router;

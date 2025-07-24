@@ -29,7 +29,6 @@ export function VehicleCard({ vehicle, onViewDetails }: VehicleCardProps) {
     <div className="vehicle-card bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden group">
       {/* Gradient overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-      
       <div className="relative z-10">
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
