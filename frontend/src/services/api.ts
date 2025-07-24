@@ -6,6 +6,11 @@ import type { Vehicle } from '../types';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   'https://vehicle-tracker-production-f186.up.railway.app/api';
 
+// Debug: Log API URL untuk troubleshooting
+console.log('🔧 DEBUG - API_BASE_URL:', API_BASE_URL);
+console.log('🔧 DEBUG - VITE_API_URL:', import.meta.env.VITE_API_URL);
+console.log('🔧 DEBUG - Environment Mode:', import.meta.env.MODE);
+
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
