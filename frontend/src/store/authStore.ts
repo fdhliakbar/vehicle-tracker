@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { api } from '../services/api';
 
 interface User {
   id: number;
@@ -18,8 +19,6 @@ interface AuthState {
   setUser: (user: User, token: string) => void;
 }
 
-const API_BASE_URL = 'http://localhost:5000/api';
-
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -29,55 +28,43 @@ export const useAuthStore = create<AuthState>()(
 
       login: async (email: string, password: string) => {
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-          });
-
-          const data = await response.json();
-
-          if (data.success) {
+          const response = await api.post('/auth/login', { email, password });
+          
+          if (response.data.success) {
             set({
-              user: data.data.user,
-              token: data.data.token,
+              user: response.data.data.user,
+              token: response.data.data.token,
               isAuthenticated: true,
             });
+            localStorage.setItem('token', response.data.data.token);
             return { success: true };
           } else {
-            return { success: false, message: data.message };
+            return { success: false, message: response.data.message };
           }
-        } catch {
-          return { success: false, message: 'Network error. Please try again.' };
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : 'Network error. Please try again.';
+          return { success: false, message: errorMessage };
         }
       },
 
       register: async (email: string, password: string, name: string) => {
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password, name }),
-          });
+          const response = await api.post('/auth/register', { email, password, name });
 
-          const data = await response.json();
-
-          if (data.success) {
+          if (response.data.success) {
             set({
-              user: data.data.user,
-              token: data.data.token,
+              user: response.data.data.user,
+              token: response.data.data.token,
               isAuthenticated: true,
             });
+            localStorage.setItem('token', response.data.data.token);
             return { success: true };
           } else {
-            return { success: false, message: data.message };
+            return { success: false, message: response.data.message };
           }
-        } catch {
-          return { success: false, message: 'Network error. Please try again.' };
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : 'Network error. Please try again.';
+          return { success: false, message: errorMessage };
         }
       },
 
