@@ -15,8 +15,13 @@ export function HeroSection() {
   }, []);
 
   const scrollToVehicles = () => {
-    const vehiclesSection = document.getElementById('vehicles-section');
-    vehiclesSection?.scrollIntoView({ behavior: 'smooth' });
+    const vehicleListSection = document.getElementById('vehicle-list');
+    if (vehicleListSection) {
+      vehicleListSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start' 
+      });
+    }
   };
 
   return (
@@ -87,14 +92,14 @@ export function HeroSection() {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center py-16 sm:py-20">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
             {/* Left Content */}
-            <div className="text-left">
+            <div className="text-left order-2 lg:order-1">
               {/* Subscription Badge */}
               <div 
-                className={`inline-flex items-center px-4 py-2 rounded-full glass-effect text-white text-sm mb-8 transition-all duration-1000 ${
+                className={`inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full glass-effect text-white text-xs sm:text-sm mb-6 sm:mb-8 transition-all duration-1000 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ animationDelay: '0.2s' }}
@@ -104,7 +109,7 @@ export function HeroSection() {
 
               {/* Main Headline */}
               <h1 
-                className={`text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow transition-all duration-1000 ${
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow transition-all duration-1000 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
                 }`}
                 style={{ animationDelay: '0.4s' }}
@@ -116,7 +121,7 @@ export function HeroSection() {
 
               {/* Description */}
               <p 
-                className={`text-lg text-blue-100 mb-8 max-w-lg leading-relaxed transition-all duration-1000 ${
+                className={`text-base sm:text-lg text-blue-100 mb-8 max-w-lg leading-relaxed transition-all duration-1000 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
                 }`}
                 style={{ animationDelay: '0.6s' }}
@@ -127,20 +132,20 @@ export function HeroSection() {
               {/* CTA Button */}
               <button
                 onClick={scrollToVehicles}
-                className={`group inline-flex items-center px-8 py-4 bg-white text-gray-800 font-semibold rounded-full hover:bg-gray-100 transform hover:scale-105 hover:shadow-2xl transition-all duration-1000 ${
+                className={`group inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 bg-white text-gray-800 font-semibold rounded-full hover:bg-gray-100 transform hover:scale-105 hover:shadow-2xl transition-all duration-1000 text-sm sm:text-base ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ animationDelay: '0.8s' }}
               >
                 <span className="mr-3">Experience now</span>
-                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-800 rounded-full flex items-center justify-center group-hover:bg-gray-900 transition-colors">
+                  <ArrowRightIcon className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>
             </div>
 
             {/* Right Content - Car Image */}
-            <div className="relative flex justify-center lg:justify-end">
+            <div className="relative flex justify-center lg:justify-end order-1 lg:order-2">
               {/* Car Container with Animation */}
               <div 
                 className={`relative transition-all duration-1500 car-bounce ${
@@ -149,19 +154,19 @@ export function HeroSection() {
                 style={{ animationDelay: '1s' }}
               >
                 {/* Rally Car - Custom CSS Design */}
-                <div className="relative w-96 h-64 lg:w-[500px] lg:h-80">
+                <div className="relative w-64 h-48 sm:w-80 sm:h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-80">
                   {/* Car Body */}
-                  <img src="/images/3d-car2.png" alt="" />
+                  <img src="/images/3d-car2.png" alt="Vehicle" className="w-full h-full object-contain" />
                   
                   {/* Wheels */}
-                  <div className="absolute bottom-0 left-8 w-16 h-16 bg-gray-800 rounded-full shadow-lg">
-                    <div className="absolute inset-2 bg-gray-600 rounded-full">
-                      <div className="absolute inset-2 bg-gray-400 rounded-full"></div>
+                  <div className="absolute bottom-0 left-4 sm:left-6 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gray-800 rounded-full shadow-lg">
+                    <div className="absolute inset-1 sm:inset-2 bg-gray-600 rounded-full">
+                      <div className="absolute inset-1 sm:inset-2 bg-gray-400 rounded-full"></div>
                     </div>
                   </div>
-                  <div className="absolute bottom-0 right-8 w-16 h-16 bg-gray-800 rounded-full shadow-lg">
-                    <div className="absolute inset-2 bg-gray-600 rounded-full">
-                      <div className="absolute inset-2 bg-gray-400 rounded-full"></div>
+                  <div className="absolute bottom-0 right-4 sm:right-6 md:right-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gray-800 rounded-full shadow-lg">
+                    <div className="absolute inset-1 sm:inset-2 bg-gray-600 rounded-full">
+                      <div className="absolute inset-1 sm:inset-2 bg-gray-400 rounded-full"></div>
                     </div>
                   </div>
                 </div>

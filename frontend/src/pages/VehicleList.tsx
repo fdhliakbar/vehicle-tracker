@@ -187,7 +187,9 @@ const VehicleDetailModal = ({ vehicle, onClose }: VehicleDetailModalProps) => {
                 <div>Lng: {vehicle.longitude.toFixed(6)}</div>
               </div>
             </div>
-          )}
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="flex justify-end p-6 border-t border-gray-200">
           <button
@@ -272,7 +274,7 @@ export function FeaturesSection() {
           </div>
 
           {/* Vehicle List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div id="vehicle-list" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {vehicles.map((vehicle, index) => (
               <VehicleListItem
                 key={vehicle.id}
