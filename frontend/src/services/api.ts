@@ -4,9 +4,7 @@ import type { Vehicle } from '../types';
 
 // ✅ Environment variable name sudah benar
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.PROD 
-    ? 'https://vehicle-tracker-production-f186.up.railway.app/api'
-    : 'http://localhost:5000/api');
+  'https://vehicle-tracker-production-f186.up.railway.app/api';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
