@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Vehicle } from '../types';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,6 +9,33 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// Add token to requests if available
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Handle response format
+api.interceptors.response.use(
+  (response) => {
+    // If response has success field, return the data
+    if (response.data && response.data.success !== undefined) {
+      return { ...response, data: response.data.data || response.data };
+    }
+    return response;
+  },
+  (error) => {
+    // Handle error responses
+    if (error.response?.data?.message) {
+      error.message = error.response.data.message;
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const vehicleApi = {
   getAllVehicles: async (): Promise<Vehicle[]> => {
