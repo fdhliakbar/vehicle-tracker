@@ -157,7 +157,7 @@ export function HeroSection() {
                 <div className="relative w-64 h-48 sm:w-80 sm:h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-80">
                   {/* Car Body */}
                   <img
-                  src="/3d-car2.png" 
+                  src="../images/3d-car2.png" 
                   alt="Vehicle" 
                   className="w-full h-full object-contain"
                   onError={(e) => {

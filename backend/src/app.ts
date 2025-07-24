@@ -16,10 +16,11 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    process.env.NODE_ENV === 'production' 
-      ? process.env.ALLOWED_ORIGINS?.split(',') || []
-      : ['http://localhost:3000', 'http://localhost:5173']
-  ].flat(),
+    'https://vehicle-tracker-ten.vercel.app', // Add this line
+    ...(process.env.NODE_ENV === 'production' 
+      ? (process.env.ALLOWED_ORIGINS?.split(',') || [])
+      : [])
+  ],
   credentials: true
 }));
 app.use(helmet());
