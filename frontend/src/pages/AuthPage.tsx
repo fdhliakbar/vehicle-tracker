@@ -162,6 +162,18 @@ export function AuthPage() {
                 : 'Enter your details to create your account.'
               }
             </p>
+            
+            {/* Test Credentials Info */}
+            {isLogin && (
+              <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h3 className="text-sm font-semibold text-blue-900 mb-2">🔑 Test Credentials:</h3>
+                <div className="text-xs text-blue-800 space-y-1">
+                  <div><strong>Admin:</strong> admin@widya.com / admin123</div>
+                  <div><strong>User:</strong> user@widya.com / user123</div>
+                  <div><strong>Demo:</strong> demo@widya.com / demo123</div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Form */}

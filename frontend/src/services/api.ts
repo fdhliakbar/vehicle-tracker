@@ -30,13 +30,11 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 // Handle response format
 api.interceptors.response.use(
   (response) => {
-    // If response has success field, return the data
-    if (response.data && response.data.success !== undefined) {
-      return { ...response, data: response.data.data || response.data };
-    }
+    console.log('📡 API Response:', response.data);
     return response;
   },
   (error) => {
+    console.log('❌ API Error:', error.response?.data || error.message);
     // Handle error responses
     if (error.response?.data?.message) {
       error.message = error.response.data.message;

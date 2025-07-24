@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthState>()(
         try {
           console.log('🔐 AuthStore: Starting login for:', email);
           const response = await api.post('/auth/login', { email, password });
-          console.log('📡 AuthStore: Login response:', response);
+          console.log('📡 AuthStore: Login response:', response.data);
           
           if (response.data.success) {
             console.log('✅ AuthStore: Login successful');
@@ -47,7 +47,19 @@ export const useAuthStore = create<AuthState>()(
           }
         } catch (error: unknown) {
           console.log('💥 AuthStore: Login error:', error);
-          const errorMessage = error instanceof Error ? error.message : 'Network error. Please try again.';
+          
+          // Handle different types of errors
+          let errorMessage = 'Network error. Please try again.';
+          
+          if (error && typeof error === 'object' && 'response' in error) {
+            const axiosError = error as { response?: { data?: { message?: string } } };
+            if (axiosError.response?.data?.message) {
+              errorMessage = axiosError.response.data.message;
+            }
+          } else if (error instanceof Error) {
+            errorMessage = error.message;
+          }
+          
           return { success: false, message: errorMessage };
         }
       },
@@ -68,7 +80,17 @@ export const useAuthStore = create<AuthState>()(
             return { success: false, message: response.data.message };
           }
         } catch (error: unknown) {
-          const errorMessage = error instanceof Error ? error.message : 'Network error. Please try again.';
+          let errorMessage = 'Network error. Please try again.';
+          
+          if (error && typeof error === 'object' && 'response' in error) {
+            const axiosError = error as { response?: { data?: { message?: string } } };
+            if (axiosError.response?.data?.message) {
+              errorMessage = axiosError.response.data.message;
+            }
+          } else if (error instanceof Error) {
+            errorMessage = error.message;
+          }
+          
           return { success: false, message: errorMessage };
         }
       },
