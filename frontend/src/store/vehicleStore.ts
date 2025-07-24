@@ -39,7 +39,9 @@ export const useVehicleStore = create<VehicleStore>((set, get) => ({
   },
   
   setVehicles: (vehicles) => {
-    set({ vehicles });
+    // Ensure vehicles is always an array
+    const vehicleArray = Array.isArray(vehicles) ? vehicles : [];
+    set({ vehicles: vehicleArray });
     get().calculateStats();
   },
   setSelectedVehicle: (vehicle) => set({ selectedVehicle: vehicle }),
@@ -54,7 +56,15 @@ export const useVehicleStore = create<VehicleStore>((set, get) => ({
       const response = await api.get('/vehicles');
       console.log('📡 VehicleStore: API response:', response);
       console.log('📊 VehicleStore: Response data:', response.data);
-      set({ vehicles: response.data });
+      
+      // Handle both direct array and wrapped response
+      const vehiclesData = response.data.data || response.data;
+      
+      if (!Array.isArray(vehiclesData)) {
+        throw new Error('Invalid response format: expected array of vehicles');
+      }
+      
+      set({ vehicles: vehiclesData });
       get().calculateStats();
       console.log('✅ VehicleStore: Vehicles set successfully');
     } catch (error: unknown) {
@@ -120,6 +130,14 @@ export const useVehicleStore = create<VehicleStore>((set, get) => ({
   
   calculateStats: () => {
     const vehicles = get().vehicles;
+    
+    // Ensure vehicles is an array
+    if (!Array.isArray(vehicles)) {
+      console.warn('⚠️ calculateStats: vehicles is not an array:', vehicles);
+      set({ stats: { total: 0, active: 0, inactive: 0 } });
+      return;
+    }
+    
     const total = vehicles.length;
     const active = vehicles.filter(v => v.status === 'ACTIVE').length;
     const inactive = vehicles.filter(v => v.status === 'INACTIVE').length;

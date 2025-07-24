@@ -31,6 +31,7 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 api.interceptors.response.use(
   (response) => {
     console.log('📡 API Response:', response.data);
+    // Keep the original response structure - let the stores handle data extraction
     return response;
   },
   (error) => {
