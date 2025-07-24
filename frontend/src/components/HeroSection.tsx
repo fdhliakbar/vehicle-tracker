@@ -94,12 +94,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </button>
               
-              <button className="group px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-blue-900 transition-all duration-300 transform hover:scale-105">
-                <span className="flex items-center justify-center">
-                  Learn More
-                  <BoltIcon />
-                </span>
-              </button>
+              
             </div>
 
             {/* Animated Stats */}
