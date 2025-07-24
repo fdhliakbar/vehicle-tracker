@@ -156,7 +156,15 @@ export function HeroSection() {
                 {/* Rally Car - Custom CSS Design */}
                 <div className="relative w-64 h-48 sm:w-80 sm:h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-80">
                   {/* Car Body */}
-                  <img src="/3d-car2.png" alt="Vehicle" className="w-full h-full object-contain" />
+                  <img
+                  src="/3d-car2.png" 
+                  alt="Vehicle" 
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='320' viewBox='0 0 500 320'%3E%3Crect width='500' height='320' fill='%23e5e7eb' rx='20'/%3E%3Cg transform='translate(200,100)'%3E%3Crect x='0' y='50' width='100' height='40' fill='%23F97C21' rx='5'/%3E%3Crect x='20' y='30' width='60' height='20' fill='%23374151' rx='3'/%3E%3Ccircle cx='20' cy='100' r='15' fill='%23374151'/%3E%3Ccircle cx='80' cy='100' r='15' fill='%23374151'/%3E%3Ctext x='50' y='130' font-family='Arial' font-size='12' fill='%236b7280' text-anchor='middle'%3EVehicle%3C/text%3E%3C/g%3E%3C/svg%3E";
+                  }}
+                  />
                   
                   {/* Wheels */}
                   <div className="absolute bottom-0 left-4 sm:left-6 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gray-800 rounded-full shadow-lg">
