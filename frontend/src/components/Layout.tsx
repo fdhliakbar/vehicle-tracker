@@ -8,7 +8,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-lg">
+      <header className="bg-white shadow-lg fixed top-0 left-0 w-full z-50">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" className="text-2xl font-bold text-black transition-colors duration-300">
                 Vehicle Dashboard
