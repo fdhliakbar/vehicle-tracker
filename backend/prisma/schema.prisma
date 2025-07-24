@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vehicle {
+  id         Int           @id @default(autoincrement())
+  name       String
+  status     VehicleStatus
+  fuel_level Float         @map("fuel_level")
+  odometer   Float
+  latitude   Float
+  longitude  Float
+  speed      Float
+  updated_at DateTime      @default(now()) @updatedAt @map("updated_at")
+  created_at DateTime      @default(now()) @map("created_at")
+
+  @@map("vehicles")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String
+  name       String
+  role       UserRole @default(USER)
+  is_active  Boolean  @default(true) @map("is_active")
+  created_at DateTime @default(now()) @map("created_at")
+  updated_at DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+enum VehicleStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
