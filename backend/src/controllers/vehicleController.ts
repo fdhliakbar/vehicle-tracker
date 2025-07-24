@@ -246,4 +246,3 @@ export const deleteVehicle = async (req: Request, res: Response) => {
     });
   }
 };
-
