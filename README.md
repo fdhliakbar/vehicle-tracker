@@ -1,19 +1,23 @@
 # Tugas Take-Home Intern – Widya
 ## Proyek: Dashboard Pelacak Kendaraan (Mock)
 
-[![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](https://expressjs.com/)
-
-**Fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org).**
+<div align="center">
+<img src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" alt="Express JS"/>
+</div>
 
 ## 🌐 Demo Langsung
 **[Vehicle Tracker Ten](https://vehicle-tracker-ten.vercel.app/)** ← Klik untuk mencoba!
 
 ### Demo
 - **Akses Admin**: 
-  - Email: `admin@example.com`
+  - Email: `admin@widya.com`
   - Password: `admin123`
 - **Akses User**: Daftar akun baru
 
+---
+
+## Preview Website
+<img src="/preview-website.png" />
 
 ---
 
