@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import carImage from '../images/3d-car2.png'; // Adjust the path as necessary
 
 // Icons for the new design
 const ArrowRightIcon = ({ className }: { className?: string }) => (
@@ -157,7 +158,7 @@ export function HeroSection() {
                 <div className="relative w-64 h-48 sm:w-80 sm:h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-80">
                   {/* Car Body */}
                   <img
-                  src="../images/3d-car2.png" 
+                  src={carImage} 
                   alt="Vehicle" 
                   />
                   
